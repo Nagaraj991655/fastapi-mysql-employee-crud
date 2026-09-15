@@ -25,7 +25,7 @@ services:
     restart: always
 
     environment:
-      DATABASE_URL:mysql+pymysql://appuser:apppass@employee_mysql:3306/employee_db
+      DATABASE_URL:"mysql+pymysql://appuser:apppass@employee_mysql:3306/employee_db"
 
     depends_on:
       - mysql
