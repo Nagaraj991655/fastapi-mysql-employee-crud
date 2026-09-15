@@ -12,13 +12,14 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                git config --global --add safe.directory /home/ubuntu/fastapi-mysql-employee-crud || true
+                rsync -av --delete \
+                --exclude=.git \
+                $WORKSPACE/ \
+                /home/ubuntu/fastapi-mysql-employee-crud/
 
                 cd /home/ubuntu/fastapi-mysql-employee-crud
 
-                git pull origin main
-
-                docker compose down
+                docker compose down || true
 
                 docker compose build
 
@@ -46,4 +47,3 @@ pipeline {
         }
     }
 }
-
