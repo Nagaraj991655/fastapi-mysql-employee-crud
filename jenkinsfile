@@ -12,6 +12,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
+                git config --global --add safe.directory /home/ubuntu/fastapi-mysql-employee-crud || true
+
                 cd /home/ubuntu/fastapi-mysql-employee-crud
 
                 git pull origin main
@@ -33,4 +35,15 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            echo 'Deployment Successful!'
+        }
+
+        failure {
+            echo 'Deployment Failed!'
+        }
+    }
 }
+
