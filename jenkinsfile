@@ -12,7 +12,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                rsync -av --delete \
+                rsync -rltDzv --delete \
                 --exclude=.git \
                 $WORKSPACE/ \
                 /home/ubuntu/fastapi-mysql-employee-crud/
