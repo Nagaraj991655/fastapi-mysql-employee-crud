@@ -7,7 +7,7 @@ load_dotenv()
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "mysql+pymysql://appuser:apppass@localhost:3306/employee_db"
+    "mysql+pymysql://appuser:apppass@employee_mysql:3306/employee_db"
 )
 
 # Create engine with connection pooling and optimizations
