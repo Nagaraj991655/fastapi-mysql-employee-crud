@@ -9,22 +9,27 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                sh 'docker compose build'
-            }
-        }
-
         stage('Deploy') {
             steps {
-                sh 'docker compose down'
-                sh 'docker compose up -d'
+                sh '''
+                cd /home/ubuntu/fastapi-mysql-employee-crud
+
+                git pull origin main
+
+                docker compose down
+
+                docker compose build
+
+                docker compose up -d
+                '''
             }
         }
 
         stage('Verify') {
             steps {
-                sh 'docker ps'
+                sh '''
+                docker ps
+                '''
             }
         }
     }
